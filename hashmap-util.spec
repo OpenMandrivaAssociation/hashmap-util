@@ -13,12 +13,11 @@ BuildRequires:	java-current-devel
 BuildRequires:	sysjar
 BuildRequires:	mvn(org.checkerframework:checker-qual) = 4.4.0
 Requires:	mvn(org.checkerframework:checker-qual) = 4.4.0
-Requires:	mvn(org.plumelib:reflection-util) = 1.0.6
 
 %description
 org.plumelib:hashmap-util provides WeakIdentityHashMap and WeakHasherMap.
-plume-util 1.8.1 compiles against this jar. The sources do not call
-reflection-util, but the upstream module depends on it at runtime.
+plume-util 1.8.1 compiles against this jar. The three classes do not
+reference reflection-util, so this package does not require it.
 
 %prep
 %autosetup -n %{name}-%{version} -p1
@@ -55,12 +54,6 @@ cat > hashmap-util.pom << 'EOF'
     </license>
   </licenses>
   <dependencies>
-    <dependency>
-      <groupId>org.plumelib</groupId>
-      <artifactId>reflection-util</artifactId>
-      <version>1.0.6</version>
-      <scope>runtime</scope>
-    </dependency>
     <dependency>
       <groupId>org.checkerframework</groupId>
       <artifactId>checker-qual</artifactId>
